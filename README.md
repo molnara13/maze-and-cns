@@ -12,37 +12,37 @@ I would also like to add that some of the training practices described in this a
 In order to have an environment with flexible complexity, I am going to create a different maze environment whose resolution can be modified. I am going to start the training on a very small resolution environment to separate the measures of the difficulties of this task.
 
 Possible versions of the maze:
--T-maze
--E-maze without windows
--E-maze with windows
--E-maze with reward clues
+- T-maze
+- E-maze without windows
+- E-maze with windows
+- E-maze with reward clues
 
 I also intend to use more complicated reward systems which is probably key in the effectiveness of biological agents at similar tasks. To mimic the learning process of biological agents, revisiting branches might be allowed.
 
 Alternate reward systems:
--instead of finding the exit or circle (later:goal), negative rewards (punishments) might be introduced for time spent in the maze
--managing to have the goal in sight can be rewarded
+- instead of finding the exit or circle (later:goal), negative rewards (punishments) might be introduced for time spent in the maze
+- managing to have the goal in sight can be rewarded
 
 Alternate reward systems suggested by the authors:
--intrinsic rewards
+- intrinsic rewards
 
 Methods tried by the authors:
 Model-free:
--DQN
--Rainbow
--PPO
--RND
+- DQN
+- Rainbow
+- PPO
+- RND
 Model-based:
--Dreamer V2
+- Dreamer V2
 
 Neuroscience ideas for new methods:
--Bayesian brain
--Active inference
--Adversarial brain
+- Bayesian brain
+- Active inference
+- Adversarial brain
 
 Neuroscience ideas for memory implementation:
--Hopfield networks
--Kanerva machines
+- Hopfield networks
+- Kanerva machines
 
 ## Resources:
 A Learning Gap Between Neuroscience and Reinforcement Learning' (Wauthier et al., 2021) arXiv:2104.10995
