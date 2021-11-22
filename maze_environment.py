@@ -1,7 +1,6 @@
 """
 
 """
-from PIL import Image
 
 from environment import Environment
 from maze import Maze
