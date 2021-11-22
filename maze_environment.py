@@ -42,12 +42,16 @@ class MazeEnvironment(Environment):
                 pass
 
         if not bump(action):
-            self.maze.grid.cells[action].update_cell_type("visited")
+            self.set_cell_type_to_visited(action)
             self.update_agent_position(action)
             self.generate_state()
 
     def update_agent_position(self, action):
         self.agent_position = action
+
+    def set_cell_type_to_visited(self, action):
+            cell = self.maze.grid.cells[action]
+            cell.update_cell_type("visited")
 
     def end_of_episode(self):
         if self.agent_position == goal:
