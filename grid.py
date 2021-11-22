@@ -2,9 +2,11 @@ from cell import Cell
 
 class Grid:
 
-    def __init__(self, size, separate=None):
+    def __init__(self, size, separate=None, clues=None, goal=None):
             self.size = size
             self._separate = separate
+            self._clues = clues
+            self._goal = goal
             self.init_cells()
 
     def init_new_cell(self, indices):
