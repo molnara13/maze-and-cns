@@ -1,7 +1,6 @@
 """
 
 """
-from PIL import Image
 
 from environment import Environment
 from maze import Maze
@@ -19,7 +18,7 @@ class MazeEnvironment(Environment):
             self.t = t
             self.init_maze(maze_type)
             self.agent_position = self.maze.start
-            self.state = self.generate_state()
+            self.state = state
 
     def init_maze(self, maze_type):
             if maze_type == "e_maze":
@@ -29,12 +28,6 @@ class MazeEnvironment(Environment):
             coordinates = self.agent_position
             cells = self.maze.grid.cells
             return cells(coordinates).cell_type
-
-    def generate_state(self):
-            pass
-
-    def display_state(self):
-            pass
 
     def update(self, action):
 
