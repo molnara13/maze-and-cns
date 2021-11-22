@@ -4,13 +4,13 @@ class Grid:
 
     def __init__(self, size, separate=None):
             self.size = size
-            self.separate = separate
+            self._separate = separate
             self.init_cells()
 
     def init_new_cell(self, indices):
             cell = Cell(indices, "unvisited")
-            if self.separate:
-                cell.generate_connections(self.size, self.separate)
+            if self._separate:
+                cell.generate_connections(self.size, _self.separate)
 
 
     def init_cells(self):
