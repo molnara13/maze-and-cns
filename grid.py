@@ -28,7 +28,6 @@ class Grid:
 
             return cell_type
 
-
     def init_cells(self):
 
             n, k = self.size
