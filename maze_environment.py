@@ -6,6 +6,7 @@ from environment import Environment
 from maze import Maze
 from e_maze import E_Maze
 from cell import Cell
+from maze_state import State
 
 class MazeEnvironment(Environment):
 
@@ -18,7 +19,7 @@ class MazeEnvironment(Environment):
             self.t = t
             self.init_maze(maze_type)
             self.agent_position = self.maze.start
-            self.state = state
+            self.state = State(self)
 
     def init_maze(self, maze_type):
             if maze_type == "e_maze":
