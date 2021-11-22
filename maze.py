@@ -7,8 +7,8 @@ class Maze:
             size=None,
             start=None,
             goal=None,
-            clues=None,
-            init_grid=None):
+            clues=None
+            ):
 
         self.size = size
         self.start = start
