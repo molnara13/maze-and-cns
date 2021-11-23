@@ -9,13 +9,16 @@ class State:
 
             self._agent_view_by_cell = self._init_view(env)
             self.create_image_view()
-    
 
     def _init_view(self, env):
             pass
 
     def create_image_view(self):
-            pass
+            state_array = self._agent_view_by_cell
+            image_base = np.uint8(env.colormap(image_base)*255)
+            im = Image.fromarray(image_base)
+            
+            return im
 
     def display(self):
             pass
