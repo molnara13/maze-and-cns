@@ -1,6 +1,7 @@
 """
 
 """
+from matplotlib import cm
 
 from environment import Environment
 from maze import Maze
@@ -11,12 +12,11 @@ from maze_state import State
 class MazeEnvironment(Environment):
 
 
-
     def __init__(
             self,
             maze_type="e_maze",
             t=0,
-            colormap="nipy_spectral",
+            colormap=cm.nipy_spectral,
             state=None):
 
             super().__init__()
