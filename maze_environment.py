@@ -12,13 +12,19 @@ class MazeEnvironment(Environment):
 
 
 
-    def __init__(self, maze_type="e_maze", t=0, state=None):
+    def __init__(
+            self,
+            maze_type="e_maze",
+            t=0,
+            colormap="nipy_spectral",
+            state=None):
 
             super().__init__()
             
             self.t = t
             self.init_maze(maze_type)
             self.agent_position = self.maze.start
+            self.colormap = colormap
             self.state = State(self)
 
     def init_maze(self, maze_type):
