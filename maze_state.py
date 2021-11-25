@@ -9,6 +9,7 @@ class State:
 
             self._agent_view_by_cell = self._init_view(env)
             self.create_image_view(env)
+            #self.display()
 
     def _init_view(self, env):
             pass
@@ -19,4 +20,5 @@ class State:
             self.image_view = im
 
     def display(self):
-            pass
+            im = self.image_view
+            im.resize((200, 200)).show()
