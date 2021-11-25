@@ -4,6 +4,15 @@ from matplotlib import cm
 
 class State:
     
+    cell_type_encoding = {
+            "unvisited": 0,
+            "visited": 1,
+            "wall": 2,
+            "negative_clue": 3,
+            "positive_clue": 4,
+            "goal": 5,
+            "occupied_by_agent": 6 
+            }
 
     def __init__(self, env):
 
