@@ -16,8 +16,7 @@ class State:
     def create_image_view(self, env):
             image_base = np.uint8(env.colormap(self._agent_view_by_cell)*255)
             im = Image.fromarray(image_base)
-            
-            return im
+            self.image_view = im
 
     def display(self):
             pass
