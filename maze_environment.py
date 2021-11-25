@@ -30,11 +30,6 @@ class MazeEnvironment(Environment):
     def init_maze(self, maze_type):
             if maze_type == "e_maze":
                 self.maze = E_Maze()
-                
-    def get_agent_position_cell_type(self):
-            coordinates = self.agent_position
-            cells = self.maze.grid.cells
-            return cells(coordinates).cell_type
 
     def update(self, action):
 
