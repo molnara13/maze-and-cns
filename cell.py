@@ -3,6 +3,7 @@ class Connection:
             coordinates,
             neighbour_coordinates,
             wall_seperated=None):
+
         y, x = coordinates
         self.neighbour_coordinates = neighbour_coordinates
         self.wall_seperated = wall_seperated
@@ -16,6 +17,7 @@ class Cell:
             coordinates,
             cell_type=None,
             connections=None):
+    
         self.coordinates = coordinates
         self.cell_type = cell_type
         self.connections = connections
@@ -28,7 +30,7 @@ class Cell:
             def remove_out_of_range_neighbours(size, neighbours):
 
                     def is_out_of_range(size, neighbours):
-                            return (not (0, 0)<=neighbour_coordinates<size)
+                            return (not (0, 0) <= neighbour_coordinates < size)
 
                     for neighbour_coordinates in neighbours:
                         if is_out_of_range(size, neighbour_coordinates):
