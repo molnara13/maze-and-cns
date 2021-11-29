@@ -24,10 +24,24 @@ class State:
 
             def update_view_cell_types(minigrid, env):
 
-                    def update_view_cell_type(minigrid, env):
+                    def update_view_cell_type(connection, minigrid, env):
 
-                            def env_coords_to_view_coords():
-                                    pass
+                            def env_coords_to_view_coords(
+                                    env,
+                                    connection_coords
+                                    ):
+                                agent_position = np.asarray(env.agent_position)
+                                env_coords = np.asarray(
+                                                env.get_cell_from_coords(
+                                                    connection_coords
+                                                    )
+                                                )
+                                view_coords = np.substract(
+                                                    agent_position,
+                                                    env_coords
+                                                    )
+                                return tuple(map(tuple, view_coords))
+
 
                             def encode_cell_type(cell_type):
 
@@ -35,14 +49,14 @@ class State:
 
                             connection_coords = connecion.neighbour_coordinates
                             view_coords = env_coords_to_view_coords(
-                                                    connection_coords)
-
+                                                env, connection_coords
+                                                )
                             cell_type = env.get_cell_tpye_from_coords(
                                                 connection_coords
                                                 )
                             minigrid[view_coords] = encode_cell_type(cell_type)
 
-                    centre = env.maze.grid(env.agent_position)
+                    centre = env.get_cell_from_coords(env.agent_position)
                     for connection in centre.connections:
                             if not connecion.wall_separated:
                                 update_view_cell_type(connection,
@@ -50,7 +64,6 @@ class State:
 
             minigrid = np.zeros((3*3))*2
             update_view_cell_types(minigrid, env)
-
 
             return minigrid
 
