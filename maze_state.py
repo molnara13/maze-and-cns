@@ -37,11 +37,10 @@ class State:
                             view_coords = env_coords_to_view_coords(
                                                     connection_coords)
 
-                            minigrid(view_coords) = encode_cell_type(
-                                                        env.get_cell_tpye_from_coords(
-                                                            connection_coords
-                                                            )
-                                                        )
+                            cell_type = env.get_cell_tpye_from_coords(
+                                                connection_coords
+                                                )
+                            minigrid[view_coords] = encode_cell_type(cell_type)
 
                     centre = env.maze.grid(env.agent_position)
                     for connection in centre.connections:
