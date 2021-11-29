@@ -15,6 +15,7 @@ class Grid:
             cell = Cell(indices, cell_type)
             if self._separate:
                 cell.generate_connections(self.size, self._separate)
+            return cell
 
     def get_cell_type_from_indices(self, indices):
 
