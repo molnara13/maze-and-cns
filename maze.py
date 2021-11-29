@@ -17,7 +17,7 @@ class Maze:
 
     def init_grid(self):
             pass
-
-    def get_cell_type_from_coords(self, coords):
-            retrn self.grid.get_cell_from_coords(coords)
+        
+    def get_cell_from_coords(self, coords):
+        return self.grid.get_cell_from_coords(coords)
 
