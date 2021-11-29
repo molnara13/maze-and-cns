@@ -1,36 +1,33 @@
 """
 
 """
-from matplotlib import cm
 
 from environment import Environment
 from maze import Maze
 from e_maze import E_Maze
 from cell import Cell
-from maze_state import State
 
 class MazeEnvironment(Environment):
 
 
 
-    def __init__(
-            self,
-            maze_type="e_maze",
-            t=0,
-            colormap=cm.nipy_spectral,
-            state=None):
+    def __init__(self, maze_type="e_maze", t=0, state=None):
 
             super().__init__()
             
             self.t = t
             self.init_maze(maze_type)
             self.agent_position = self.maze.start
-            self.colormap = colormap
-            self.state = State(self)
+            self.state = state
 
     def init_maze(self, maze_type):
             if maze_type == "e_maze":
                 self.maze = E_Maze()
+                
+    def get_agent_position_cell_type(self):
+            coordinates = self.agent_position
+            cells = self.maze.grid.cells
+            return cells(coordinates).cell_type
 
     def update(self, action):
 
@@ -66,12 +63,11 @@ class MazeEnvironment(Environment):
 
     def step(self, action):
 
+
+
             self.t += 1
             self.update(action)
             state = self.state
             reward, done = self.give_feedback()
 
             return state, reward, done
-
-    def get_cell_type_from_coords(self, coords):
-            return self.maze.get_cell_type_from_coords(coords)
