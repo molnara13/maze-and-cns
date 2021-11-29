@@ -66,10 +66,12 @@ class MazeEnvironment(Environment):
     def step(self, action):
 
 
-
             self.t += 1
             self.update(action)
             state = self.state
             reward, done = self.give_feedback()
 
             return state, reward, done
+        
+    def get_maze_cell_from_coords(self, coords):
+            return self.maze.get_grid_cell_from_coords(coords)
