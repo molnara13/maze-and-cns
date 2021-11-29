@@ -37,9 +37,9 @@ class Grid:
                     cell = self.init_new_cell((i, j))
                     cells[i].append(cell)
             self.cells = cells
-            
-    def get_cell_from_coordinates(self, coordinates):
-            return self.cells[coordinates]
+
+    def get_cell_type_from_coords(self, coordinates):
+            return self.cells[coordinates].cell_type
 
 
 
