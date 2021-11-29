@@ -33,7 +33,7 @@ class Agent:
             self.score_means.append(score_mean)
 
     def check(self):
-            pass
+            print('episode: ', i, 'score_mean: ', score_mean)
 
     def summarize(self):
             learning_curve(
