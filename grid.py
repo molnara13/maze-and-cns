@@ -39,7 +39,7 @@ class Grid:
             self.cells = cells
             
     def get_cell_from_coords(self, coords):
-            return self.cells[coordinates]
+            return self.cells[coords]
 
 
 
