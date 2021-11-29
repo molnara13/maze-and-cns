@@ -51,7 +51,7 @@ class Cell:
                     for neighbour in neighbours:
                             new_connection(self, neighbour)
 
-            def update_neighbour_separations(self, separate):
+            def update_connection_separations(self, separate):
                     for connection in self.connections:
 
                             connection_start = self.coordinates
@@ -62,4 +62,4 @@ class Cell:
                             connection.update_separation(wall_separated)
 
             init_connections(self)
-            update_neighbour_separations(self, separate)
+            update_connection_separations(self, separate)
