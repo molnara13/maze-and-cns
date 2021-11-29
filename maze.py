@@ -19,5 +19,5 @@ class Maze:
             pass
         
     def get_cell_from_coords(self, coords):
-        return self.grid.get_cell_from_coords(coords)
+            return self.grid.get_cell_from_coords(coords)
 
