@@ -73,5 +73,9 @@ class MazeEnvironment(Environment):
 
             return state, reward, done
         
-    def get_maze_cell_from_coords(self, coords):
-            return self.maze.get_grid_cell_from_coords(coords)
+    def get_cell_from_coords(self, coords):
+            return self.maze.get_cell_from_coords(coords)
+
+    def get_cell_type_from_coords(self, coords):
+            cell = self.get_cell_from_coords(coords)
+            return cell.cell_type
