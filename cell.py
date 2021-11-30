@@ -15,15 +15,15 @@ class Cell:
     def __init__(
             self,
             coordinates,
-            cell_type=None,
+            type_=None,
             connections=None):
     
         self.coordinates = coordinates
-        self.cell_type = cell_type
+        self.type_ = type_
         self.connections = connections
 
-    def update_cell_type(self, new_cell_type):
-            self.cell_type = new_cell_type
+    def update_type_(self, new_type_):
+            self.type_ = new_type_
 
     def generate_connections(self, maze_size, separate_cells):
 

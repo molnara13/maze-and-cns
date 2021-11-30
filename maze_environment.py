@@ -78,4 +78,4 @@ class MazeEnvironment(Environment):
 
     def get_cell_type_from_coords(self, coords):
             cell = self.get_cell_from_coords(coords)
-            return cell.cell_type
+            return cell.type_
