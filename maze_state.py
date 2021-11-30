@@ -31,11 +31,7 @@ class State:
                                     connection_coords
                                     ):
                                 agent_position = np.asarray(env.agent_position)
-                                env_coords = np.asarray(
-                                                env.get_cell_from_coords(
-                                                    connection_coords
-                                                    )
-                                                )
+                                env_coords = np.asarray(connection_coords)
                                 view_coords = np.subtract(
                                                     agent_position,
                                                     env_coords
