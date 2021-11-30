@@ -43,7 +43,7 @@ class State:
 
                                     return cell_type_encoding[cell_type]
 
-                            connection_coords = connection.neighbour_coordinates
+                            connection_coords = connection.neighbours
                             view_coords = env_coords_to_view_coords(
                                                 env, connection_coords
                                                 )
