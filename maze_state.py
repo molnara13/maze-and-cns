@@ -31,12 +31,8 @@ class State:
                                     connection_coords
                                     ):
                                 agent_position = np.asarray(env.agent_position)
-                                env_coords = np.asarray(
-                                                env.get_cell_from_coords(
-                                                    connection_coords
-                                                    )
-                                                )
-                                view_coords = np.substract(
+                                env_coords = np.asarray(connection_coords)
+                                view_coords = np.subtract(
                                                     agent_position,
                                                     env_coords
                                                     )
@@ -47,7 +43,7 @@ class State:
 
                                     return cell_type_encoding[cell_type]
 
-                            connection_coords = connecion.neighbour_coordinates
+                            connection_coords = connection.neighbour_coordinates
                             view_coords = env_coords_to_view_coords(
                                                 env, connection_coords
                                                 )
@@ -58,7 +54,7 @@ class State:
 
                     centre = env.get_cell_from_coords(env.agent_position)
                     for connection in centre.connections:
-                            if not connecion.wall_separated:
+                            if not connection.wall_separated:
                                 update_view_cell_type(connection,
                                                         minigrid, env)
 

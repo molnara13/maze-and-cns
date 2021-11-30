@@ -2,14 +2,14 @@ class Connection:
     def __init__(self,
             coordinates,
             neighbour_coordinates,
-            wall_seperated=None):
+            wall_separated=None):
 
         y, x = coordinates
         self.neighbour_coordinates = neighbour_coordinates
-        self.wall_seperated = wall_seperated
+        self.wall_separated = wall_separated
 
-    def update_separation(self, wall_seperated):
-            self.wall_seperated = wall_seperated
+    def update_separation(self, wall_separated):
+            self.wall_separated = wall_separated
 
 class Cell:
     def __init__(
@@ -25,7 +25,7 @@ class Cell:
     def update_cell_type(self, new_cell_type):
             self.cell_type = new_cell_type
 
-    def generate_connections(self, maze_size, separate):
+    def generate_connections(self, maze_size, separate_cells):
 
             def remove_out_of_range_neighbours(size, neighbours):
 
@@ -53,15 +53,13 @@ class Cell:
                     for neighbour in neighbours:
                             new_connection(self, neighbour)
 
-            def update_neighbour_separations(self, separate):
+            def update_neighbour_separations(self, separate_cells):
                     for connection in self.connections:
 
-                            connection_start = self.coordinates
-                            connection_end = connection.neighbour_coordinates
-                            wall_separated = separate(
-                                                connection_start,
-                                                connection_end)
+                            cell1 = self.coordinates
+                            cell2 = connection.neighbour_coordinates
+                            wall_separated = separate_cells(cell1, cell2)
                             connection.update_separation(wall_separated)
 
             init_connections(self)
-            update_neighbour_separations(self, separate)
+            update_neighbour_separations(self, separate_cells)
