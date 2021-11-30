@@ -58,7 +58,7 @@ class State:
 
                     centre = env.get_cell_from_coords(env.agent_position)
                     for connection in centre.connections:
-                            if not connecion.wall_separated:
+                            if not connection.wall_separated:
                                 update_view_cell_type(connection,
                                                         minigrid, env)
 
