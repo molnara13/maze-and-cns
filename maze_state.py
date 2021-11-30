@@ -36,7 +36,7 @@ class State:
                                                     connection_coords
                                                     )
                                                 )
-                                view_coords = np.substract(
+                                view_coords = np.subtract(
                                                     agent_position,
                                                     env_coords
                                                     )
