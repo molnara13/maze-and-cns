@@ -2,9 +2,9 @@ from cell import Cell
 
 class Grid:
 
-    def __init__(self, size, separate=None, clues=None, goal=None):
+    def __init__(self, size, separate_cells=None, clues=None, goal=None):
             self.size = size
-            self._separate = separate
+            self._separate_cells = separate_cells
             self._clues = clues
             self._goal = goal
             self.init_cells()
@@ -13,8 +13,8 @@ class Grid:
 
             cell_type = self.get_cell_type_from_indices(indices)
             cell = Cell(indices, cell_type)
-            if self._separate:
-                cell.generate_connections(self.size, self._separate)
+            if self._separate_cells:
+                cell.generate_connections(self.size, self._separate_cells)
             return cell
 
     def get_cell_type_from_indices(self, indices):
