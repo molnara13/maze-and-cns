@@ -24,14 +24,14 @@ class State:
 
             def update_view_cell_types(minigrid, env):
 
-                    def update_view_cell_type(connection, minigrid, env):
+                    def update_view_cell_type(neighbour, minigrid, env):
 
                             def env_coords_to_view_coords(
                                     env,
-                                    connection_coords
+                                    neighbour_coords
                                     ):
                                 agent_position = np.asarray(env.agent_position)
-                                env_coords = np.asarray(connection_coords)
+                                env_coords = np.asarray(neighbour_coords)
                                 view_coords = np.subtract(
                                                     agent_position,
                                                     env_coords
@@ -43,19 +43,19 @@ class State:
 
                                     return cell_type_encoding[cell_type]
 
-                            connection_coords = connection.neighbours
+                            neighbour_coords = neighbour.coordinates
                             view_coords = env_coords_to_view_coords(
-                                                env, connection_coords
+                                                env, neighbour_coords
                                                 )
                             cell_type = env.get_cell_tpye_from_coords(
-                                                connection_coords
+                                                neighbour_coords
                                                 )
                             minigrid[view_coords] = encode_cell_type(cell_type)
 
                     centre = env.get_cell_from_coords(env.agent_position)
-                    for connection in centre.connections:
-                            if not connection.wall_separated:
-                                update_view_cell_type(connection,
+                    for neighbour in centre.neighbours:
+                            if not neighbour.is_wall_separated:
+                                update_view_cell_type(neighbour,
                                                         minigrid, env)
 
             minigrid = np.zeros((3*3))*2

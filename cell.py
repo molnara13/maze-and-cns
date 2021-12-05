@@ -1,31 +1,30 @@
-class Connection:
+class Neighbour:
     def __init__(self,
             coordinates,
-            neighbours,
-            wall_separated=None):
+            #neighbours,
+            is_wall_separated=None):
 
-        y, x = coordinates
-        self.neighbours = neighbours
-        self.wall_separated = wall_separated
+        self.coordinates = coordinates
+        self.is_wall_separated = is_wall_separated
 
-    def update_separation(self, wall_separated):
-            self.wall_separated = wall_separated
+    def update_separation(self, is_wall_separated):
+            self.is_wall_separated = is_wall_separated
 
 class Cell:
     def __init__(
             self,
             coordinates,
             type_=None,
-            connections=None):
+            neighbours=[]):
     
         self.coordinates = coordinates
         self.type_ = type_
-        self.connections = connections
+        self.neighbours = neighbours
 
     def update_type_(self, new_type_):
             self.type_ = new_type_
 
-    def generate_connections(self, maze_size, separate_cells):
+    def generate_neighbours(self, maze_size, separate_cells):
 
             def remove_out_of_range_neighbours(size, neighbours):
 
@@ -36,9 +35,9 @@ class Cell:
                         if is_out_of_range(size, neighbour):
                             neighbours.remove(neighbour)
 
-            def new_connection(self, neighbour):
-                    connection = Connection(self.coordinates, neighbour)
-                    self.connections.append(connection)
+            def new_neighbour(self, neighbour):
+                    neighbour = Neighbour(self.coordinates)
+                    self.neighbours.append(neighbour)
             
             def get_neighbours(self):
                     y, x = self.coordinates
@@ -47,19 +46,19 @@ class Cell:
 
                     return neighbours
 
-            def init_connections(self):
-                    self.connections = []
+            def init_neighbours(self):
+                    self.neighbours = []
                     neighbours = get_neighbours(self)
                     for neighbour in neighbours:
-                            new_connection(self, neighbour)
+                            new_neighbour(self, neighbour)
 
             def update_neighbour_separations(self, separate_cells):
-                    for connection in self.connections:
+                    for neighbour in self.neighbours:
 
                             cell1 = self.coordinates
-                            cell2 = connection.neighbours
-                            wall_separated = separate_cells(cell1, cell2)
-                            connection.update_separation(wall_separated)
+                            cell2 = neighbour.coordinates
+                            is_wall_separated = separate_cells(cell1, cell2)
+                            neighbour.update_separation(is_wall_separated)
 
-            init_connections(self)
+            init_neighbours(self)
             update_neighbour_separations(self, separate_cells)

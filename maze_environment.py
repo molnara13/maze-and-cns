@@ -33,23 +33,25 @@ class MazeEnvironment(Environment):
 
     def update(self, action):
 
-        def bump(action):
+        def is_collision(action):
                 pass
 
-        if not bump(action):
+        def update_agent_position(self, action):
+                self.agent_position = action
+
+        def set_cell_type_to_visited(self):
+
+                cell = self.get_cell_from_coords(self.agent_position)
+                cell.update_cell_type("visited")
+
+        if not is_collision(action):
             self.update_agent_position(action)
             self.set_cell_type_to_visited(self.agent_position)
             self.generate_state()
 
-    def update_agent_position(self, action):
-        self.agent_position = action
 
-    def set_cell_type_to_visited(self):
 
-            cell = self.get_cell_from_coords(self.agent_position)
-            cell.update_cell_type("visited")
-
-    def end_of_episode(self):
+    def is_episode_ending(self):
         if self.agent_position == goal:
             return True
         else:
@@ -57,7 +59,7 @@ class MazeEnvironment(Environment):
 
     def give_feedback(self):
 
-            if not self.end_of_episode():
+            if not self.is_episode_ending():
                 reward, done = -1, False
             else:
                 reward, done = 0, True
