@@ -3,8 +3,8 @@ class Neighbour:
             location,
             origin,
             #neighbours,
-            separate_cells,
-            is_wall_separated=None):
+            separate_cells
+            ):
 
         self.location = location
         self.is_wall_separated = separate_cells(location, origin)
@@ -28,34 +28,15 @@ class Cell:
             self.type_ = new_type_
 
     def init_neighbours(self):
-            """
-            def get_neighbour_locations(self):
-
-                    def is_in_range(neighbour):
-                            return ((0, 0) <= neighbour < self._get_neighbour_locations)
-
-                    def remove_out_of_range_location(locations):
-                            locations = list(filter(is_in_range, locations))
-
-                    y, x = self.location
-                    neighbour_locations = []
-                    for j in range(y-1, y+2):
-                        for i in range(x-1, x+2):
-                            neighbour_locations.append((y, x))
-                    remove_out_of_range_location(neighbour_locations)
-
-                    return neighbour_locations
-            """
-#!
 
             origin = self.location
             separate_cells = self._separate_cells
             neighbours = []
             neighbour_locations = self._get_neighbour_locations(self.location)
 
-            for locations in neighbour_locations:
+            for neighbour_location in neighbour_locations:
                     neighbour = Neighbour(
-                        locations,
+                        neighbour_location,
                         origin,
                         separate_cells)
                     neighbours.append(neighbour)
