@@ -30,7 +30,7 @@ class Grid:
                     cell_type = self.get_cell_type_from_location((i, j))
                     cell = Cell(
                         (i, j),
-                        self.size,
+                        self.get_neighbour_locations,
                         self._separate_cells,
                         cell_type
                         )
@@ -53,6 +53,20 @@ class Grid:
                 ]
 
             return neighbour_cells
+
+    def get_neighbour_locations(self, cell_location):
+
+        def is_in_range(location, size=self.size):
+                return ((0, 0) <= location < size)
+
+        y, x = cell_location
+        neighbour_locations = []
+        for j in range(y-1, y+2):
+            for i in range(x-1, x+2):
+                if is_in_range((y, x)):
+                    neighbour_locations.append((y, x))
+
+        return neighbour_locations
 
 
 

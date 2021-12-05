@@ -13,7 +13,7 @@ class Cell:
     def __init__(
             self,
             location,
-            maze_size,
+            get_neighbour_locations,
             separate_cells,
             type_=None
             ):
@@ -21,18 +21,18 @@ class Cell:
         self.location = location
         self.type_ = type_
         self._separate_cells = separate_cells
-        self._maze_size = maze_size
+        self._get_neighbour_locations = get_neighbour_locations
         self.init_neighbours()
 
     def update_type_(self, new_type_):
             self.type_ = new_type_
 
     def init_neighbours(self):
-
+            """
             def get_neighbour_locations(self):
 
                     def is_in_range(neighbour):
-                            return ((0, 0) <= neighbour < self._maze_size)
+                            return ((0, 0) <= neighbour < self._get_neighbour_locations)
 
                     def remove_out_of_range_location(locations):
                             locations = list(filter(is_in_range, locations))
@@ -45,11 +45,14 @@ class Cell:
                     remove_out_of_range_location(neighbour_locations)
 
                     return neighbour_locations
+            """
+#!
 
             origin = self.location
             separate_cells = self._separate_cells
             neighbours = []
-            neighbour_locations = get_neighbour_locations(self)
+            neighbour_locations = self._get_neighbour_locations(self.location)
+
             for locations in neighbour_locations:
                     neighbour = Neighbour(
                         locations,
