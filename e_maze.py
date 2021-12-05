@@ -15,6 +15,7 @@ class E_Maze(Maze):
 
             self.grid = Grid(self.size, self.separate_cells)
 
+
     def separate_cells(self, cell1, cell2):
             walls = [
                 ((1, 0), (1, 1)),
@@ -22,7 +23,9 @@ class E_Maze(Maze):
                 ((2, 0), (2, 1)),
                 ((2, 1), (2, 2)),
                 ]
-            if ((cell1, cell2) in walls) or ((cell2, cell1) in walls):
+            if ((cell1, cell2) in walls
+                    or (cell2, cell1) in walls
+                    or cell1 == cell2):
                 return True
             else:
                 return False

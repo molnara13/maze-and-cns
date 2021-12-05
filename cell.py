@@ -1,64 +1,60 @@
 class Neighbour:
     def __init__(self,
             coordinates,
+            origin,
             #neighbours,
+            separate_cells,
             is_wall_separated=None):
 
         self.coordinates = coordinates
-        self.is_wall_separated = is_wall_separated
-
-    def update_separation(self, is_wall_separated):
-            self.is_wall_separated = is_wall_separated
+        self.is_wall_separated = separate_cells(coordinates, origin)
 
 class Cell:
     def __init__(
             self,
             coordinates,
-            type_=None,
-            neighbours=[]):
+            maze_size,
+            separate_cells,
+            type_=None
+            ):
     
         self.coordinates = coordinates
         self.type_ = type_
-        self.neighbours = neighbours
+        self._separate_cells = separate_cells
+        self._maze_size = maze_size
+        self.init_neighbours()
 
     def update_type_(self, new_type_):
             self.type_ = new_type_
 
-    def generate_neighbours(self, maze_size, separate_cells):
+    def init_neighbours(self):
 
-            def remove_out_of_range_neighbours(size, neighbours):
+            def get_neighbour_coordinates(self):
 
-                    def is_out_of_range(size, neighbour):
-                            return (not (0, 0) <= neighbour < size)
+                    def is_in_range(neighbour):
+                            return ((0, 0) <= neighbour < self._maze_size)
 
-                    for neighbour in neighbours:
-                        if is_out_of_range(size, neighbour):
-                            neighbours.remove(neighbour)
+                    def remove_out_of_range_coordinates(coords):
+                            coords = list(filter(is_in_range, coords))
 
-            def new_neighbour(self, neighbour):
-                    neighbour = Neighbour(self.coordinates)
-                    self.neighbours.append(neighbour)
-            
-            def get_neighbours(self):
                     y, x = self.coordinates
-                    neighbours = [(y, x-1), (y-1, x), (y+1, x), (y, x+1)]
-                    remove_out_of_range_neighbours(maze_size, neighbours)
+                    neighbour_coords = []
+                    for j in range(y-1, y+2):
+                        for i in range(x-1, x+2):
+                            neighbour_coords.append((y, x))
+                    remove_out_of_range_coordinates(neighbour_coords)
 
-                    return neighbours
+                    return neighbour_coords
 
-            def init_neighbours(self):
-                    self.neighbours = []
-                    neighbours = get_neighbours(self)
-                    for neighbour in neighbours:
-                            new_neighbour(self, neighbour)
+            origin = self.coordinates
+            separate_cells = self._separate_cells
+            neighbours = []
+            neighbour_coordinates = get_neighbour_coordinates(self)
+            for coords in neighbour_coordinates:
+                    neighbour = Neighbour(
+                        coords,
+                        origin,
+                        separate_cells)
+                    neighbours.append(neighbour)
 
-            def update_neighbour_separations(self, separate_cells):
-                    for neighbour in self.neighbours:
-
-                            cell1 = self.coordinates
-                            cell2 = neighbour.coordinates
-                            is_wall_separated = separate_cells(cell1, cell2)
-                            neighbour.update_separation(is_wall_separated)
-
-            init_neighbours(self)
-            update_neighbour_separations(self, separate_cells)
+            self.neighbours = neighbours

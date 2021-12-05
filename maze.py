@@ -21,3 +21,6 @@ class Maze:
     def get_cell_from_coords(self, coords):
             return self.grid.get_cell_from_coords(coords)
 
+    def get_neighbour_cells(self, cell_coords, filter_):
+            return self.grid.get_neighbour_cells(cell_coords, filter_)
+
