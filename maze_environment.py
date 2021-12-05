@@ -25,7 +25,7 @@ class MazeEnvironment(Environment):
             self.init_maze(maze_type)
             self.agent_position = self.maze.start
             self.colormap = colormap
-            self.create_state()
+            self.state = State(self)
 
     def init_maze(self, maze_type):
             if maze_type == "e_maze":
@@ -33,41 +33,22 @@ class MazeEnvironment(Environment):
 
     def update(self, action):
 
-        def is_collision(action):
+        def bump(action):
                 pass
 
-        def update_agent_position(self, action):
-                self.agent_position = action
+        if not bump(action):
+            self.set_cell_type_to_visited(action)
+            self.update_agent_position(action)
+            self.generate_state()
 
-        def set_cell_type_to_visited(self):
+    def update_agent_position(self, action):
+        self.agent_position = action
 
-                cell = self.get_cell_from_location(self.agent_position)
-                cell.update_cell_type("visited")
+    def set_cell_type_to_visited(self, action):
+            cell = self.maze.grid.cells[action]
+            cell.update_cell_type("visited")
 
-        if not is_collision(action):
-            update_agent_position(self, action)
-            set_cell_type_to_visited(self)
-            self.create_state()
-
-    def create_state(self):
-
-            def get_visible_cells(self):
-                    def is_visible(neighbour):
-                            return not neighbour.is_wall_separated
-
-                    visible_cells = self.get_neighbour_cells(
-                        self.agent_position,
-                        is_visible
-                        )
-                    return visible_cells
-            visible_cells = get_visible_cells(self)
-            self.state = State(
-                self.agent_position,
-                visible_cells,
-                self.colormap
-                )
-
-    def is_episode_ending(self):
+    def end_of_episode(self):
         if self.agent_position == goal:
             return True
         else:
@@ -75,7 +56,7 @@ class MazeEnvironment(Environment):
 
     def give_feedback(self):
 
-            if not self.is_episode_ending():
+            if not self.end_of_episode():
                 reward, done = -1, False
             else:
                 reward, done = 0, True
@@ -92,12 +73,9 @@ class MazeEnvironment(Environment):
 
             return state, reward, done
         
-    def get_cell_from_location(self, location):
-            return self.maze.get_cell_from_location(location)
+    def get_cell_from_coords(self, coords):
+            return self.maze.get_cell_from_coords(coords)
 
-    def get_cell_type_from_location(self, location):
-            cell = self.get_cell_from_location(location)
-            return cell.type_
-
-    def get_neighbour_cells(self, cell_location, filter_):
-            return self.maze.get_neighbour_cells(cell_location, filter_)
+    def get_cell_type_from_coords(self, coords):
+            cell = self.get_cell_from_coords(coords)
+            return cell.cell_type
