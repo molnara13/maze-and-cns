@@ -25,7 +25,7 @@ class MazeEnvironment(Environment):
             self.init_maze(maze_type)
             self.agent_position = self.maze.start
             self.colormap = colormap
-            self.state = State(self)
+            self.create_state()
 
     def init_maze(self, maze_type):
             if maze_type == "e_maze":
@@ -45,11 +45,23 @@ class MazeEnvironment(Environment):
                 cell.update_cell_type("visited")
 
         if not is_collision(action):
-            self.update_agent_position(action)
-            self.set_cell_type_to_visited(self.agent_position)
-            self.generate_state()
+            update_agent_position(self, action)
+            set_cell_type_to_visited(self)
+            self.create_state()
 
+    def create_state(self):
 
+            def get_subgrid(self):
+                    def are_non_separate(neighbour):
+                            return not neighbour.is_wall_separated
+
+                    subgrid = self.get_neighbour_cells(
+                        self.agent_position,
+                        are_non_separate
+                        )
+                    return subgrid
+            subgrid = get_subgrid(self)
+            self.state = State(self.agent_position, subgrid, self.colormap)
 
     def is_episode_ending(self):
         if self.agent_position == goal:
@@ -82,3 +94,6 @@ class MazeEnvironment(Environment):
     def get_cell_type_from_coords(self, coords):
             cell = self.get_cell_from_coords(coords)
             return cell.type_
+
+    def get_neighbour_cells(self, cell_coords, filter_):
+            return self.maze.get_neighbour_cells(cell_coords, filter_)
