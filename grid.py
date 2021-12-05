@@ -9,11 +9,11 @@ class Grid:
             self._goal = goal
             self.init_cells()
 
-    def get_cell_type_from_coords(self, coords):
+    def get_cell_type_from_location(self, location):
 
-            if coords == self._goal:
+            if location == self._goal:
                 cell_type = "goal"
-            elif (self._clues) and (coords in self._clues):
+            elif (self._clues) and (location in self._clues):
 
                 cell_type = "clue"
             else:
@@ -27,7 +27,7 @@ class Grid:
             cells = [[] for i in range(n)]
             for i in range(n):
                 for j in range(k):
-                    cell_type = self.get_cell_type_from_coords((i, j))
+                    cell_type = self.get_cell_type_from_location((i, j))
                     cell = Cell(
                         (i, j),
                         self.size,
@@ -38,17 +38,17 @@ class Grid:
                     cells[i].append(cell)
             self.cells = cells
             
-    def get_cell_from_coords(self, coords):
-            y, x = coords
+    def get_cell_from_location(self, location):
+            y, x = location
             return self.cells[y][x]
 
-    def get_neighbour_cells(self, cell_coordinates, filter_=True):
+    def get_neighbour_cells(self, cell_location, filter_=True):
 
-            cell = self.get_cell_from_coords(cell_coordinates)
+            cell = self.get_cell_from_location(cell_location)
             neighbours = cell.neighbours
             filtered_neighbours = list(filter(filter_, neighbours))
             neighbour_cells = [
-                self.get_cell_from_coords(neighbour.coordinates)
+                self.get_cell_from_location(neighbour.location)
                 for neighbour in filtered_neighbours
                 ]
 

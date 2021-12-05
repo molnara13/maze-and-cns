@@ -1,24 +1,24 @@
 class Neighbour:
     def __init__(self,
-            coordinates,
+            location,
             origin,
             #neighbours,
             separate_cells,
             is_wall_separated=None):
 
-        self.coordinates = coordinates
-        self.is_wall_separated = separate_cells(coordinates, origin)
+        self.location = location
+        self.is_wall_separated = separate_cells(location, origin)
 
 class Cell:
     def __init__(
             self,
-            coordinates,
+            location,
             maze_size,
             separate_cells,
             type_=None
             ):
     
-        self.coordinates = coordinates
+        self.location = location
         self.type_ = type_
         self._separate_cells = separate_cells
         self._maze_size = maze_size
@@ -29,30 +29,30 @@ class Cell:
 
     def init_neighbours(self):
 
-            def get_neighbour_coordinates(self):
+            def get_neighbour_locations(self):
 
                     def is_in_range(neighbour):
                             return ((0, 0) <= neighbour < self._maze_size)
 
-                    def remove_out_of_range_coordinates(coords):
-                            coords = list(filter(is_in_range, coords))
+                    def remove_out_of_range_location(locations):
+                            locations = list(filter(is_in_range, locations))
 
-                    y, x = self.coordinates
-                    neighbour_coords = []
+                    y, x = self.location
+                    neighbour_locationss = []
                     for j in range(y-1, y+2):
                         for i in range(x-1, x+2):
-                            neighbour_coords.append((y, x))
-                    remove_out_of_range_coordinates(neighbour_coords)
+                            neighbour_locationss.append((y, x))
+                    remove_out_of_range_location(neighbour_locationss)
 
-                    return neighbour_coords
+                    return neighbour_locationss
 
-            origin = self.coordinates
+            origin = self.location
             separate_cells = self._separate_cells
             neighbours = []
-            neighbour_coordinates = get_neighbour_coordinates(self)
-            for coords in neighbour_coordinates:
+            neighbour_locations = get_neighbour_locations(self)
+            for locations in neighbour_locations:
                     neighbour = Neighbour(
-                        coords,
+                        locations,
                         origin,
                         separate_cells)
                     neighbours.append(neighbour)

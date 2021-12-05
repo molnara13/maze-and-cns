@@ -31,21 +31,20 @@ class State:
 
                     return cell_type_encoding[cell_type]
 
-            def transform_(self, neighbour_coords):
+            def transform_(self, neighbour_location):
                     agent_position = np.asarray(self._agent_position)
-                    env_coords = np.asarray(neighbour_coords)
-                    view_coords = np.subtract(
+                    environment_location = np.asarray(neighbour_location)
+                    view_location = np.subtract(
                                         agent_position,
-                                        env_coords
+                                        environment_location
                                         )
-                    print('view_coords', view_coords)
-                    return tuple(map(tuple, view_coords))
+                    return tuple(map(tuple, view_location))
 
             view_array = set_all_to_wall()
             for cell in self._visible_cells:
-                    cell_coords = cell.coordinates
+                    cell_location = cell.coordinates
                     cell_type = cell.type_
-                    y, x = transform_(self, cell_coords)
+                    y, x = transform_(self, cell_location)
                     view_array[y][x] = encode_cell_type(cell_type)
 
             return view_array

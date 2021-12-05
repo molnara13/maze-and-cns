@@ -41,7 +41,7 @@ class MazeEnvironment(Environment):
 
         def set_cell_type_to_visited(self):
 
-                cell = self.get_cell_from_coords(self.agent_position)
+                cell = self.get_cell_from_location(self.agent_position)
                 cell.update_cell_type("visited")
 
         if not is_collision(action):
@@ -92,12 +92,12 @@ class MazeEnvironment(Environment):
 
             return state, reward, done
         
-    def get_cell_from_coords(self, coords):
-            return self.maze.get_cell_from_coords(coords)
+    def get_cell_from_location(self, location):
+            return self.maze.get_cell_from_location(location)
 
-    def get_cell_type_from_coords(self, coords):
-            cell = self.get_cell_from_coords(coords)
+    def get_cell_type_from_location(self, location):
+            cell = self.get_cell_from_location(location)
             return cell.type_
 
-    def get_neighbour_cells(self, cell_coords, filter_):
-            return self.maze.get_neighbour_cells(cell_coords, filter_)
+    def get_neighbour_cells(self, cell_location, filter_):
+            return self.maze.get_neighbour_cells(cell_location, filter_)
