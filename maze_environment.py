@@ -51,17 +51,21 @@ class MazeEnvironment(Environment):
 
     def create_state(self):
 
-            def get_subgrid(self):
-                    def are_non_separate(neighbour):
+            def get_visible_cells(self):
+                    def is_visible(neighbour):
                             return not neighbour.is_wall_separated
 
-                    subgrid = self.get_neighbour_cells(
+                    visible_cells = self.get_neighbour_cells(
                         self.agent_position,
-                        are_non_separate
+                        is_visible
                         )
-                    return subgrid
-            subgrid = get_subgrid(self)
-            self.state = State(self.agent_position, subgrid, self.colormap)
+                    return visible_cells
+            visible_cells = get_visible_cells(self)
+            self.state = State(
+                self.agent_position,
+                visible_cells,
+                self.colormap
+                )
 
     def is_episode_ending(self):
         if self.agent_position == goal:

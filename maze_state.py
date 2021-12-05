@@ -14,9 +14,9 @@ class State:
                 }
 
 
-    def __init__(self, agent_position, subgrid, colormap):
+    def __init__(self, agent_position, visible_cells, colormap):
             self._agent_position = agent_position
-            self._subgrid = subgrid
+            self._visible_cells = visible_cells
             self._colormap = colormap
             self._cell_view = self._create_cell_view()
             self.image_view = self._create_image_view()
@@ -42,7 +42,7 @@ class State:
                     return tuple(map(tuple, view_coords))
 
             view_array = set_all_to_wall()
-            for cell in self._subgrid:
+            for cell in self._visible_cells:
                     cell_coords = cell.coordinates
                     cell_type = cell.type_
                     y, x = transform_(self, cell_coords)
