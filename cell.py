@@ -38,13 +38,13 @@ class Cell:
                             locations = list(filter(is_in_range, locations))
 
                     y, x = self.location
-                    neighbour_locationss = []
+                    neighbour_locations = []
                     for j in range(y-1, y+2):
                         for i in range(x-1, x+2):
-                            neighbour_locationss.append((y, x))
-                    remove_out_of_range_location(neighbour_locationss)
+                            neighbour_locations.append((y, x))
+                    remove_out_of_range_location(neighbour_locations)
 
-                    return neighbour_locationss
+                    return neighbour_locations
 
             origin = self.location
             separate_cells = self._separate_cells
