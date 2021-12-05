@@ -1,44 +1,67 @@
-class Neighbour:
+class Connection:
     def __init__(self,
-            location,
-            origin,
-            #neighbours,
-            separate_cells
-            ):
+            coordinates,
+            neighbour_coordinates,
+            wall_seperated=None):
 
-        self.location = location
-        self.is_wall_separated = separate_cells(location, origin)
+        y, x = coordinates
+        self.neighbour_coordinates = neighbour_coordinates
+        self.wall_seperated = wall_seperated
+
+    def update_separation(self, wall_seperated):
+            self.wall_seperated = wall_seperated
 
 class Cell:
     def __init__(
             self,
-            location,
-            get_neighbour_locations,
-            separate_cells,
-            type_=None
-            ):
+            coordinates,
+            cell_type=None,
+            connections=None):
     
-        self.location = location
-        self.type_ = type_
-        self._separate_cells = separate_cells
-        self._get_neighbour_locations = get_neighbour_locations
-        self.init_neighbours()
+        self.coordinates = coordinates
+        self.cell_type = cell_type
+        self.connections = connections
 
-    def update_type_(self, new_type_):
-            self.type_ = new_type_
+    def update_cell_type(self, new_cell_type):
+            self.cell_type = new_cell_type
 
-    def init_neighbours(self):
+    def generate_connections(self, maze_size, separate):
 
-            origin = self.location
-            separate_cells = self._separate_cells
-            neighbours = []
-            neighbour_locations = self._get_neighbour_locations(self.location)
+            def remove_out_of_range_neighbours(size, neighbours):
 
-            for neighbour_location in neighbour_locations:
-                    neighbour = Neighbour(
-                        neighbour_location,
-                        origin,
-                        separate_cells)
-                    neighbours.append(neighbour)
+                    def is_out_of_range(size, neighbours):
+                            return (not (0, 0) <= neighbour_coordinates < size)
 
-            self.neighbours = neighbours
+                    for neighbour_coordinates in neighbours:
+                        if is_out_of_range(size, neighbour_coordinates):
+                            neighbours.remove(neighbour_coordinates)
+
+            def new_connection(self, neighbour):
+                    connection = Connection(self.coordinates, neighbour)
+                    self.connections.append(connection)
+            
+            def get_neighbour_coordinates(self):
+                    y, x = self.coordinates
+                    neighbours = [(y, x-1), (y-1, x), (y+1, x), (y, x+1)]
+                    remove_out_of_range_neighbours(maze_size, neighbours)
+
+                    return neighbours
+
+            def init_connections(self):
+                    self.connections = []
+                    neighbours = get_neighbour_coordinates(self)
+                    for neighbour in neighbours:
+                            new_connection(self, neighbour)
+
+            def update_neighbour_separations(self, separate):
+                    for connection in self.connections:
+
+                            connection_start = self.coordinates
+                            connection_end = connection.neighbour_coordinates
+                            wall_separated = separate(
+                                                connection_start,
+                                                connection_end)
+                            connection.update_separation(wall_separated)
+
+            init_connections(self)
+            update_neighbour_separations(self, separate)
