@@ -68,7 +68,7 @@ class MazeEnvironment(Environment):
                 )
 
     def is_episode_ending(self):
-        if self.agent_position == goal:
+        if self.agent_position == self.maze.goal:
             return True
         else:
             return False
