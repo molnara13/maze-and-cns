@@ -44,9 +44,8 @@ class MazeEnvironment(Environment):
     def update_agent_position(self, action):
         self.agent_position = action
 
-    def set_cell_type_to_visited(self, action):
-            cell = self.maze.grid.cells[action]
-            cell.update_cell_type("visited")
+                cell = self.get_cell_from_location(self.agent_position)
+                cell.update_type_("visited")
 
     def end_of_episode(self):
         if self.agent_position == goal:
