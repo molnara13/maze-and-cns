@@ -42,7 +42,7 @@ class MazeEnvironment(Environment):
         def set_cell_type_to_visited(self):
 
                 cell = self.get_cell_from_location(self.agent_position)
-                cell.update_cell_type("visited")
+                cell.update_type_("visited")
 
         if not is_collision(action):
             update_agent_position(self, action)
